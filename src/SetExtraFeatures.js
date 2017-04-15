@@ -2,51 +2,57 @@
 'use strict';
 
 Set.prototype.isSuperset = function (setB) {
-  let result = true;
-  setB.forEach(elem => {
-    if (!this.has(elem)) result = false;
-  })
+  var self = this;
+  var result = true;
+  setB.forEach(function (elem) {
+    if (!self.has(elem)) result = false;
+  });
   return result;
 }
 
 Set.prototype.union = function (setB) {
-  let resultSet = new Set(this)
+  var resultSet = new Set(this)
   if (Array.isArray(setB)) {
-    setB.forEach(set => {
+    setB.forEach(function (set) {
       resultSet = resultSet.union(set);
     });
     return resultSet;
   }
-  setB.forEach(elem => resultSet.add(elem));
+  setB.forEach(function (elem) {
+    resultSet.add(elem)
+  });
   return resultSet;
 }
 
 Set.prototype.intersection = function (setB) {
-  let intersection = new Set();
-  setB.forEach(elem => {
-    if (this.has(elem)) intersection.add(elem);
-  })
+  var self = this;
+  var intersection = new Set();
+  setB.forEach(function (elem) {
+    if (self.has(elem)) intersection.add(elem);
+  });
   return intersection;
 }
 
 Set.prototype.difference = function (setB) {
-  let difference = new Set(this);
-  setB.forEach(elem => difference.delete(elem));
+  var difference = new Set(this);
+  setB.forEach(function (elem) {
+    difference.delete(elem)
+  });
   return difference;
 }
 
 Set.prototype.cartesianProduct = function (setB) {
-  let setA = new Set(this);
-  let restultSet = new Set();
-  let valuesSetA = setA.values();
+  var setA = new Set(this);
+  var restultSet = new Set();
+  var valuesSetA = setA.values();
   if (setA.size === 0 || setB.size == 0) return resultSet;
-  
-  let times = (setA.size > setB.size) ? setA.size : setB.size;
-  let p = 0;
+
+  var times = (setA.size > setB.size) ? setA.size : setB.size;
+  var p = 0;
   while (p < times) {
-    let valuesSetA2 = valuesSetA.next();
-    let valuesSetB = setB.values();
-    let h = 0;
+    var valuesSetA2 = valuesSetA.next();
+    var valuesSetB = setB.values();
+    var h = 0;
     while (h < times) {
       restultSet.add([valuesSetA2.value, valuesSetB.next().value]);
       h++;
@@ -57,8 +63,10 @@ Set.prototype.cartesianProduct = function (setB) {
 }
 
 Set.prototype.toArray = function () {
-  let setA = new Set(this);
-  let result = []
-  setA.forEach(elem => result.push(elem))
-  return result;
+  var setA = new Set(this);
+  var resultArray = [];
+  setA.forEach(function (elem) {
+    resultArray.push(elem)
+  });
+  return resultArray;
 }
