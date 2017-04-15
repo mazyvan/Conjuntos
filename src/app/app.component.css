@@ -1,0 +1,99 @@
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding-bottom: 30px;
+  }
+}
+
+.red-badge {
+  float: right;
+  cursor: pointer;
+  background-color: #EF5350 !important;
+}
+
+.panel {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.24);
+}
+
+.list-group-item {
+  padding: 10px 11px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border: none;
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+
+.list-group {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.dropdown {
+  position: absolute;
+  right: 17px;
+}
+
+.dropdown-menu {
+  left: -68px;
+}
+
+.panel-body {
+  padding: 0;
+}
+
+.panel-heading {
+  margin-bottom: 22px;
+}
+
+.super-panel {
+  cursor: pointer;
+  position: fixed;
+  right: 15px;
+  top: -220px;
+  width: 293px;
+  padding: 18px;
+  height: 314px;
+  transition: all .4s ease-in-out;
+}
+
+.super-panel.active {
+  top: 60px;
+  cursor: default;
+}
+
+.input-add-value {
+  padding: 22px 12px;
+  font-size: 13px;
+}
+
+.fab_main_btn {
+  position: fixed;
+  bottom: 33px;
+  right: 37px;
+  background-color: #F44336;
+  width: 70px;
+  height: 70px;
+  zoom: .81;
+  text-align: center;
+  border-radius: 100%;
+  background: #F44336;
+  border: none;
+  outline: none;
+  color: #FFF;
+  font-size: 36px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: .3s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@media screen and (max-width: 768px) {
+  .fab_main_btn {
+    bottom: 19px;
+    right: 23px;
+  }
+}
+
+.input-add-value {
+  padding: 22px 12px;
+  font-size: 13px;
+}

@@ -1,3 +1,91 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Conjuntos</a>
+    </div>
+  </div>
+</nav>
+<section class="jumbotron" (click)="hideSuperPanel()" style="padding-top: 0;">
+  <div class="container">
+    <div *ngIf="showWelcomeMessage">
+      <h2>Bienvenido</h2>
+      <p>El plano está vacío, para agregar tu primer conjunto toca el botón rojo que se encuentra <br> en la parte inferior
+        derecha de la pantalla.</p>
+      <br>
+      <p style="font-size: 18px;">Copyright (c) 2017 
+        <a href="https://www.facebook.com/mazyvan" title="Ir a facebook" style="color: inherit;text-decoration: none;"><strong>Iván Sánchez </strong></a> MIT License
+      </p>
+      <button type="button" class="btn btn-default">Ver código en <strong>GitHub</strong></button>
+    </div>
+    <div class="row" *ngFor="let slkfjs of arr((sets.length | numOfRows)).fill(1); let fila = index;">
+      <div class="col-sm-3" *ngFor="let col of [0,1,2,3]">
+        <div class="panel panel-default" *ngIf="sets[((fila)*4)+col]">
+          <div class="panel-heading">
+            <strong>
+              <span style="font-size: 25px;margin-right: 10px;">{{ ((fila)*4)+col | numberToLetter }}</span>
+              <span style="padding: 5px;">{{ setsNames[((fila)*4)+col] }}</span>
+            </strong>
+            <div class="dropdown">
+              <a href="#" class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                Opciones <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" (click)="deleteSet(((fila)*4)+col)">Eliminar Conjunto</a></li>
+                <li><a href="#" (click)="showChangeSetNameInput(((fila)*4)+col)">Cambiar Nombre</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="panel-body">
+            <form (submit)="changeSetName(((fila)*4)+col, newName.value); newName.value = ''" *ngIf="changeSetNameVisibility[((fila)*4)+col]">
+              <input #newName type="text" class="form-control input-add-value" placeholder="Nuevo nombre para el conjunto" required>
+              <button type="submit" style="display:none">hidden submit</button>
+            </form>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let item of sets[((fila)*4)+col].toArray()">
+                <span (click)="deleteItem(((fila)*4)+col, item)" class="badge red-badge">&times;</span> {{ item }}
+              </li>
+            </ul>
+            <form (submit)="addItem(((fila)*4)+col, newValue.value); newValue.value = ''" *ngIf="!changeSetNameVisibility[((fila)*4)+col]">
+              <input #newValue type="text" class="form-control input-add-value" placeholder="Agregar valor" required>
+              <button type="submit" style="display:none">hidden submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="panel panel-default super-panel" [class.active]="activePanel" (click)="showSuperPanel()">
+  <div class="panel-body">
+    <h5 style="margin-bottom: 35px;">Operaciones con conjuntos</h5>
+    <input #operationInput type="text" class="form-control" [(ngModel)]="operationString" placeholder="Operación">
+    <p> </p>
+    <div class="row">
+      <div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('∪')"><strong>∪</strong></button>
+      </div>
+      <div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('∩')"><strong>∩</strong></button>
+      </div>
+      <div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('\\')"><strong>\</strong></button>
+      </div>
+    </div>
+    <p> </p>
+    <div class="row">
+      <!--<div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('′')"><strong>′</strong></button>
+      </div>-->
+      <div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('∅')"><strong>∅</strong></button>
+      </div>
+      <div class="col-xs-4">
+        <button class="btn btn-block btn-primary" (click)="appendOperator('Ω')"><strong>Ω</strong></button>
+      </div>
+    </div>
+    <p> </p>
+    <div class="row">
+      <button class="btn btn-block btn-info" (click)="calculateSetOperation()" style="margin: 18px;width: 249px;">Calcular</button>
+    </div>
+  </div>
+</div>
+<button class="fab_main_btn" (click)="addSet()">+</button>
