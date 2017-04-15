@@ -100,7 +100,7 @@ export class AppComponent {
   }
 
   hideSuperPanel() {
-    if (this.sets.length > 0) this.activePanel = false;
+    this.activePanel = false;
   }
 
   showSuperPanel() {
